@@ -7,19 +7,42 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * RestController обработки донных с пользователями
+ * по пути /users
+ */
 @RestController
 @RequestMapping("/users")
 public class UserController {
+    /**
+     * внедряем сервис с набором сервисов
+     * для работы с данными пользователями
+     */
     @Autowired
-    private RegistrationService registrationService;
+    private RegistrationService services;
+
+    /**
+     * вывод списка пользователей
+     * по пути контроллера (/users)
+     * @return список пользователей
+     */
     @GetMapping
     public List<User> userList(){
-        return registrationService.getDataProcessingService().getUserRepository().getUsers();
+        return services.getDataProcessingService().getUserRepository().getUsers();
     }
 
+    /**
+     * Добавление пользователя из тела post запроса
+     * если через postman, то в разделе body -> raw
+     * вводим строку с данными пользователя,
+     * в виде {"name":"Вася","age":23,"email":"vasya@gmail.com"}
+     * @param user
+     * @return сообщение об успешном добавлении пользователя
+     */
     @PostMapping("/body")
     public String userAddFromBody(@RequestBody User user){
-        registrationService.getDataProcessingService().getUserRepository().getUsers().add(user);
+        services.processRegistration(user);
+        //services.getDataProcessingService().getUserRepository().getUsers().add(user);
         return "User added from body";
     }
 }
