@@ -1,9 +1,12 @@
 package com.example.springBootRest.model;
 
+/**
+ * Модель пользователя
+ */
 public class User {
-    private String name;
-    private int age;
-    private String email;
+    private String name; // наименование
+    private int age; // возраст
+    private String email; // почта
 
     // region getters
     public String getName() {
