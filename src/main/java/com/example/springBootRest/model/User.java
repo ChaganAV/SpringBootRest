@@ -8,6 +8,15 @@ public class User {
     private int age; // возраст
     private String email; // почта
 
+    public User() {
+    }
+
+    public User(String name, int age, String email) {
+        this.name = name;
+        this.age = age;
+        this.email = email;
+    }
+
     // region getters
     public String getName() {
         return name;
